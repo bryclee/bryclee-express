@@ -1,0 +1,32 @@
+@sudokuSize: 50px;
+@sudokuMainBorder: 5px;
+@sudokuSubBorder: 1px;
+@sudokuSubBoxSize: @sudokuSize * 3 + @sudokuSubBorder * 2;
+
+@sudokuSelectColor: #88BBDD;
+
+.sudoku-main-box {
+  border: @sudokuMainBorder solid black;
+  margin: 0 auto;
+  width: @sudokuSubBoxSize * 3 + @sudokuMainBorder * 2;
+}
+
+.sudoku-sub-box {
+  display: inline-block;
+  border: @sudokuSubBorder solid black;
+  width: @sudokuSubBoxSize;
+}
+
+.sudoku-single-box {
+  display: inline-block;
+  position: relative;
+  height: @sudokuSize;
+  width: @sudokuSize;
+  text-align: center;
+}
+
+.sudoku-single-box:focus {
+  box-shadow: 0 0 5px 3px @sudokuSelectColor;
+  outline: 0;
+  z-index: 1;
+}
