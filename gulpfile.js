@@ -14,13 +14,16 @@ gulp.task('default', () => {
   // Fill out default task later ʕ´•ᴥ•`ʔ
 });
 
-gulp.task('build', ['webpack', 'less']);
+gulp.task('build', ['del', 'webpack', 'less']);
 
-gulp.task('del', () => {
-  return del(['.build/**']);
+gulp.task('del', (done) => {
+  return del([path.join(BUILD_DIR, '**')], function() {
+    done();
+  });
 });
 
-gulp.task('webpack', (done) => {
+gulp.task('webpack', ['del'], (done) => {
+  // Build with webpack. See webpack.config.js for build options
   webpack(webpackConfig, (err, stats) => {
     if (err) {
       throw err;
@@ -30,8 +33,7 @@ gulp.task('webpack', (done) => {
   });
 });
 
-
-gulp.task('less', () => {
+gulp.task('less', ['del'], () => {
   gulp.src('public/css/**/*.less')
     .pipe(less())
     .pipe(gulp.dest(path.join(BUILD_DIR, 'css')));
@@ -62,4 +64,4 @@ gulp.task('test', () => {
         })
       });
     }())
-})
+});
