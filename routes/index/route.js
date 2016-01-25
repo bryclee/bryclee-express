@@ -2,6 +2,7 @@ var express = require('express');
 var ejs = require('ejs');
 var path = require('path');
 var fs = require('fs');
+var promisify = require('../../lib/promisify');
 
 var indexApp = express();
 
@@ -22,22 +23,12 @@ var SAMPLE_MODEL = {
 }
 
 // Promise interface for readFile
-var readPromise = function(file) {
-  return new Promise((resolve, reject) => {
-    fs.readFile(file, 'utf-8', (err, data) => {
-      if (err) {
-        reject(err);
-      } else {
-        resolve(data);
-      }
-    });
-  });
-};
+var readPromise = promisify(fs.readFile);
 
 indexApp.get('/', function(req, res) {
   Promise.all([
-    readPromise(path.resolve(__dirname, 'index.ejs')),
-    readPromise(path.resolve(__dirname, '../master.ejs'))
+    readPromise(path.resolve(__dirname, 'index.ejs'), 'utf-8'),
+    readPromise(path.resolve(__dirname, '../master.ejs'), 'utf-8')
   ]).then((templs) => {
     res.send(ejs.render(templs[1], {
       title: 'Index',
