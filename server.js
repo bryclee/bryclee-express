@@ -18,6 +18,7 @@ app.set('view engine', 'ejs');
 // Cache the master template for subapps to use
 
 // Base route
-app.get('/', index);
+// app.get('/', index);
+app.use(index);
 
 module.exports = app;
