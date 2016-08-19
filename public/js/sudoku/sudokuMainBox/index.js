@@ -5,6 +5,7 @@ import 'sudoku/sudokuSingleBox/index';
 import 'sudoku/sudokuModel/index';
 import 'sudoku/sudokuKeycodes/index';
 import {convertToXY, convertToMainSub} from 'sudoku/utils/index'
+import template from './template.html';
 
 angular
   .module('sudokuMainBox', [
@@ -19,7 +20,7 @@ angular
 
       return {
         restict: 'E',
-        templateUrl: 'js/sudoku/sudokuMainBox/template.html',
+        template: template,
         link: function(scope, element, attrs) {
 
           var valueModel = new SudokuModel();

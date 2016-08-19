@@ -32,7 +32,7 @@ indexApp.get('/', (req, res) => {
   ]).then((templs) => {
     res.send(ejs.render(templs[1], {
       title: 'Index',
-      style: 'css/app.css',
+      style: 'static/css/app.css',
       content: ejs.render(templs[0], SAMPLE_MODEL)
     }));
   }).catch((err) => {
@@ -49,7 +49,7 @@ indexApp.get('/sudoku', (req, res) => {
   ]).then((templs) => {
     res.send(ejs.render(templs[1], {
       title: 'Sudoku',
-      style: 'css/sudoku/sudoku.css',
+      style: 'static/css/sudoku/sudoku.css',
       content: ejs.render(templs[0], {})
     }));
   }).catch((err) => {

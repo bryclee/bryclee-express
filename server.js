@@ -8,8 +8,21 @@ var index = require('./routes/index/route');
 
 var VIEW_DIR = 'public/templates';
 
+// If running local dev mode, add the webpack dev middleware
+if (process.env.NODE_ENV === 'dev') {
+  var webpackDevMiddleware = require('webpack-dev-middleware');
+  var webpack = require('webpack');
+  var webpackConfig = require('./webpack.config.js');
+
+  var compiler = webpack(webpackConfig);
+
+  app.use(webpackDevMiddleware(compiler, {
+    publicPath: '/static/js/'
+  }));
+}
+
 // Set up static to read .build files
-app.use(express.static('.build'))
+app.use('/static', express.static('.build'))
 
 // Set up templating
 app.set('views', VIEW_DIR);

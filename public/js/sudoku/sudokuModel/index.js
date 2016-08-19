@@ -26,7 +26,7 @@ function getAllCoords(coord1) {
     return {};
   }
 
-  return coord2;
+  return {x, y, main, sub};
 }
 
 angular.module('sudokuModel', [])

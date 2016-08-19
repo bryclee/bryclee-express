@@ -4,11 +4,11 @@ var path = require('path');
 var baseDir = process.cwd();
 
 module.exports = {
-    devtool: 'source-map',
+    devtool: '#inline-source-map',
 
     context: path.join(baseDir, 'public/js'),
     output: {
-        path: path.join(baseDir, '.build/js'),
+        path: path.join(baseDir, '.build/js/'),
         filename: '[name].bundle.js'
     },
     entry: {
@@ -40,6 +40,10 @@ module.exports = {
                 query: {
                     presets: ['es2015']
                 }
+            },
+            {
+                test: /\.html$/,
+                loader: 'html-loader'
             }
         ]
     }

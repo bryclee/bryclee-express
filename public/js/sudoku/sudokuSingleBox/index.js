@@ -3,6 +3,7 @@
 import 'angular';
 import 'sudoku/sudokuFocus/index';
 import 'sudoku/sudokuKeycodes/index';
+import template from './template.html';
 
 angular
   .module('sudokuSingleBox', [
@@ -16,7 +17,7 @@ angular
       return {
         restrict: 'E',
         replace: true,
-        templateUrl: 'js/sudoku/sudokuSingleBox/template.html',
+        template: template,
         scope: {
           'mainIndex': '@',
           'subIndex': '@',
