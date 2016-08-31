@@ -5,6 +5,7 @@ var del = require('del');
 var webpack = require('webpack');
 var webpackConfig = require('./webpack.config');
 var less = require('gulp-less');
+var mocha = require('gulp-mocha');
 
 var through = require('through2');
 
@@ -14,14 +15,17 @@ gulp.task('default', () => {
   // Fill out default task later ʕ´•ᴥ•`ʔ
 });
 
+// Build task
 gulp.task('build', ['del', 'webpack', 'less']);
 
+// Clean up the build directory
 gulp.task('del', (done) => {
   return del([path.join(BUILD_DIR, '**')], function() {
     done();
   });
 });
 
+// Bundle the files
 gulp.task('webpack', ['del'], (done) => {
   // Build with webpack. See webpack.config.js for build options
   webpack(webpackConfig, (err, stats) => {
@@ -33,22 +37,35 @@ gulp.task('webpack', ['del'], (done) => {
   });
 });
 
+// Build the CSS files
 gulp.task('less', ['del'], () => {
   gulp.src('public/css/**/*.less')
     .pipe(less())
     .pipe(gulp.dest(path.join(BUILD_DIR, 'css')));
 });
 
+// Copy over files from the public directory
 gulp.task('copy', () => {
   gulp.src([
+    // Include files
     'public/**/*',
+    // Exclude files
     '!public/js/**/*.js',
     '!public/css/**/*',
     '!public/template/**/*'
   ]).pipe(gulp.dest(BUILD_DIR));
 });
 
+// Run the unit tests
 gulp.task('test', () => {
+  return gulp.src(['tests/**/*Spec.js'], { read: false })
+    .pipe(mocha({
+      reporter: 'spec'
+    }));
+});
+
+// An example of what the an html compile step might look like?
+gulp.task('html', () => {
   // This is not really needed, just a test to see what a plugin is like
   gulp.src('public/templates/**/*.ejs', {buffer: false})
     .pipe(function() {

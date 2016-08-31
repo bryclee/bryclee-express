@@ -23,7 +23,7 @@ function getAllCoords(coord1) {
     ({ main, sub } = coord1);
     ({ x, y } = utils.convertToXY(coord1.main, coord1.sub));
   } else {
-    return {};
+    return {}; // return error?
   }
 
   return {x, y, main, sub};
@@ -84,14 +84,13 @@ angular.module('sudokuModel', [])
 
       this.values.forEach(function(row, rowIdx) {
         row.forEach(function(val, colIdx) {
-          var {main} = utils.convertToMainSub(rowIdx + 1, colIdx + 1);
+          var {main} = utils.convertToMainSub(rowIdx, colIdx);
+
           rows[rowIdx][val] = rows[rowIdx][val] ? rows[rowIdx][val] + 1 : 1;
-          columns[colIdx][val] = columns[colIdx][val] ? columns[colIdx][val] : 1;
+          columns[colIdx][val] = columns[colIdx][val] ? columns[colIdx][val] + 1 : 1;
           subs[main][val] = subs[main][val] ? subs[main][val] + 1 : 1;
         });
       });
-
-      console.log(rows, columns, subs);
     };
 
     return SudokuModel;
