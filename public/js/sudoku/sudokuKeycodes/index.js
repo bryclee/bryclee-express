@@ -11,7 +11,7 @@ angular.module('sudokuKeycodes', [])
       'DOWN': 40,
       'BKSP': 8,
       'TAB': 9,
-      '0': 48,
+      '1': 49,
       '9': 58
     };
   }]);

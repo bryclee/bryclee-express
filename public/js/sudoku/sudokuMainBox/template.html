@@ -1,10 +1,11 @@
 <div class="sudoku-main-box">
-  <div class="sudoku-sub-box" ng-repeat="n in [0,1,2,3,4,5,6,7,8] track by $index">
-    <sudoku-single-box ng-repeat="m in [0,1,2,3,4,5,6,7,8] track by $index"
-      main-index="{{n}}" sub-index="{{m}}"
+  <div class="sudoku-sub-box" ng-repeat="main in viewModels">
+    <sudoku-single-box ng-repeat="box in main"
+      main-index="{{box.main}}" sub-index="{{box.sub}}"
       navigate="navigator(dir, main, sub)"
       on-change="updateValue(value, main, sub)"
-      focused="mainSelect === n && subSelect === m">
+      focused="mainSelect === box.main && subSelect === box.sub"
+      invalid="box.invalid">
     </sudoku-single-box>
   </div>
 </div>

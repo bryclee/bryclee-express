@@ -1,1 +1,5 @@
-<input class="sudoku-single-box" ng-keydown="keyHandler($event)" ng-model="value" sudoku-focus="focused"></input>
+<input class="sudoku-single-box"
+    ng-class="{'sudoku-single-box_invalid': invalid}"
+    ng-keydown="keyHandler($event)"
+    ng-model="value"
+    sudoku-focus="focused"></input>

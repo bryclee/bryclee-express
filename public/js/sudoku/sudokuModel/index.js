@@ -1,27 +1,17 @@
 'use strict';
 
 import 'angular';
-import utils from 'sudoku/utils/index';
-
-
-function createArray(n, value) {
-  return Array.apply(null, Array(n)).map(() => {
-    if (typeof value === 'function') {
-      return value();
-    }
-    return value;
-  });
-}
+import { createArray, convertToMainSub, convertToXY } from 'sudoku/utils/index';
 
 function getAllCoords(coord1) {
   var x, y, main, sub;
 
   if (angular.isDefined(coord1.x) && angular.isDefined(coord1.y)) {
     ({ x, y } = coord1);
-    ({ main, sub } = utils.convertToMainSub(coord1.x, coord1.y));
+    ({ main, sub } = convertToMainSub(coord1.x, coord1.y));
   } else if (angular.isDefined(coord1.main) && angular.isDefined(coord1.sub)) {
     ({ main, sub } = coord1);
-    ({ x, y } = utils.convertToXY(coord1.main, coord1.sub));
+    ({ x, y } = convertToXY(coord1.main, coord1.sub));
   } else {
     return {}; // return error?
   }
@@ -42,11 +32,6 @@ angular.module('sudokuModel', [])
       this.values = createArray(9, () => {
         return createArray(9, 0);
       });
-
-      var createObject = function() { return {} };
-      this.rows = createArray(9, createObject);
-      this.columns = createArray(9, createObject);
-      this.subs = createArray(9, createObject);
     };
 
     /*
@@ -81,16 +66,39 @@ angular.module('sudokuModel', [])
       var rows = createArray(9, createObject);
       var columns = createArray(9, createObject);
       var subs = createArray(9, createObject);
+      var invalidPositions = [];
 
+      // Count up the rows and look for duplicates
       this.values.forEach(function(row, rowIdx) {
         row.forEach(function(val, colIdx) {
-          var {main} = utils.convertToMainSub(rowIdx, colIdx);
+          if (!val) {
+            return;
+          }
 
-          rows[rowIdx][val] = rows[rowIdx][val] ? rows[rowIdx][val] + 1 : 1;
-          columns[colIdx][val] = columns[colIdx][val] ? columns[colIdx][val] + 1 : 1;
-          subs[main][val] = subs[main][val] ? subs[main][val] + 1 : 1;
+          var {main} = convertToMainSub(colIdx, rowIdx);
+          var pos = [colIdx, rowIdx];
+
+          // Check for duplicates
+          if (rows[rowIdx][val] || columns[colIdx][val] || subs[main][val]) {
+            var prevRow = rows[rowIdx][val];
+            var prevCol = columns[colIdx][val];
+            var prevSub = subs[main][val];
+
+            if (prevRow && !invalidPositions.includes(prevRow[0])) invalidPositions.push(prevRow[0]);
+            if (prevCol && !invalidPositions.includes(prevCol[0])) invalidPositions.push(prevCol[0]);
+            if (prevSub && !invalidPositions.includes(prevSub[0])) invalidPositions.push(prevSub[0]);
+
+            invalidPositions.push(pos);
+          }
+
+          // Store the positions of the numbers so we can match duplicates
+          rows[rowIdx][val] ? rows[rowIdx][val].push(pos) : (rows[rowIdx][val] = [pos]);
+          columns[colIdx][val] ? columns[colIdx][val].push(pos) : (columns[colIdx][val] = [pos]);
+          subs[main][val] ? subs[main][val].push(pos) : (subs[main][val] = [pos]);
         });
       });
+
+      return invalidPositions;
     };
 
     return SudokuModel;

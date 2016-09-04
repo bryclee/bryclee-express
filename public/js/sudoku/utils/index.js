@@ -4,7 +4,7 @@ module.exports = {
   /**
    *  Takes coordinates organized by main and sub-index and converts into x and y
    */
-  convertToXY: function(main, sub) {
+  convertToXY(main, sub) {
     return {
       x: ((main) % 3) * 3 + (sub) % 3,
       y: Math.floor((main) / 3) * 3 + Math.floor((sub) / 3)
@@ -18,10 +18,22 @@ module.exports = {
    *      0,4 -> 1,1
    *      3,0 -> 4,0
    */
-  convertToMainSub: function(x, y) {
+  convertToMainSub(x, y) {
     return {
       main: Math.floor(x / 3) + 3 * Math.floor((y) / 3),
       sub: ((x) % 3) + ((y) % 3) * 3
     };
+  },
+
+  /*
+    Create an array of n length with each index === value, or value() if a function
+  */
+  createArray(n, value) {
+    return Array.apply(null, Array(n)).map((a, idx) => {
+      if (typeof value === 'function') {
+        return value(idx);
+      }
+      return value;
+    });
   }
 }

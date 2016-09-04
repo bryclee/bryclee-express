@@ -23,13 +23,13 @@ angular
           'subIndex': '@',
           'onChange': '&',
           'navigate': '&',
-          'focused': '='
+          'focused': '=',
+          'invalid': '='
         },
         link: function(scope, element, attrs) {
           var navigate = scope.navigate;
 
           function updateValue(value) {
-            console.log(scope.mainIndex, attrs.mainIndex);
             scope.onChange({value: value, main: parseInt(scope.mainIndex), sub: parseInt(scope.subIndex)});
           };
 
@@ -41,11 +41,12 @@ angular
             if (e.altKey || e.ctrlKey || e.shiftKey || e.metaKey) {
               return;
             }
-
-            if (key >= KEYS['0'] && KEYS['9']) {
+            // If is a value
+            if (key >= KEYS['1'] && key <= KEYS['9']) {
               scope.value = key - 48;
               updateValue(scope.value);
             }
+            // If is a navigation key
             switch (key) {
               case KEYS.LEFT:
               case KEYS.UP:
@@ -55,6 +56,7 @@ angular
                 break;
               case KEYS.BKSP:
                 scope.value = '';
+                updateValue(null);
                 break;
               case KEYS.TAB:
                 return;
