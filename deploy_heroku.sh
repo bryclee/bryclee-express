@@ -7,3 +7,4 @@ gulp build
 git add .build/* -f
 git commit -m "Heroku build commit"
 git push heroku heroku:master -f
+git checkout -
