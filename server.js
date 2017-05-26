@@ -4,7 +4,7 @@ var app = express();
 var ejs = require('ejs');
 
 // Import subapps
-var index = require('./routes/index/route');
+var index = require('./routes');
 
 var VIEW_DIR = 'public/templates';
 
