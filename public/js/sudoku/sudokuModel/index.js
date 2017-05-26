@@ -28,6 +28,7 @@ angular.module('sudokuModel', [])
       this.init();
     };
 
+    // values: 2 layer nested array, rows then columns
     SudokuModel.prototype.init = function() {
       this.values = createArray(9, () => {
         return createArray(9, 0);

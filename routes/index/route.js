@@ -2,6 +2,7 @@ var express = require('express');
 var ejs = require('ejs');
 var path = require('path');
 var fs = require('fs');
+var request = require('request');
 var promisify = require('../../lib/promisify');
 
 var indexApp = express();
@@ -56,6 +57,12 @@ indexApp.get('/sudoku', (req, res) => {
     console.error(err.stack);
     res.status(500).send(err);
   })
+});
+
+indexApp.get('/imgur/:resource', (req, res) => {
+    const imageId = req.params.resource;
+    request.get(`https://i.imgur.com/${imageId}`)
+        .pipe(res);
 });
 
 module.exports = indexApp;
