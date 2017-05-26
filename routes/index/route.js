@@ -62,6 +62,10 @@ indexApp.get('/sudoku', (req, res) => {
 indexApp.get('/imgur/:resource', (req, res) => {
     const imageId = req.params.resource;
     request.get(`https://i.imgur.com/${imageId}`)
+        .on('error', err => {
+            console.error(`Error reading resource ${imageId}`, err);
+            res.send('Meow');
+        })
         .pipe(res);
 });
 
