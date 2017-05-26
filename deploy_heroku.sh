@@ -5,6 +5,6 @@ git branch -D heroku
 git checkout -b heroku
 gulp build
 git add .build/* -f
-git commit -m "Heroku build commit"
+git commit -m "*** build commit for heroku ***"
 git push heroku heroku:master -f
 git checkout -
