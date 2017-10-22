@@ -4,10 +4,11 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "gulp build",
+    "test": "gulp test",
     "start": "node index.js",
     "dev": "NODE_ENV=dev node index.js",
-    "deploy": "./deploy_heroku.sh"
+    "deploy": "gulp build && gulp test && ./deploy_heroku.sh"
   },
   "author": "",
   "license": "ISC",

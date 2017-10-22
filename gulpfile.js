@@ -16,7 +16,7 @@ gulp.task('default', () => {
 });
 
 // Build task
-gulp.task('build', ['del', 'webpack', 'less']);
+gulp.task('build', ['del', 'webpack', 'copy', 'less']);
 
 // Clean up the build directory
 gulp.task('del', (done) => {
@@ -45,7 +45,7 @@ gulp.task('less', ['del'], () => {
 });
 
 // Copy over files from the public directory
-gulp.task('copy', () => {
+gulp.task('copy', ['del'], () => {
   gulp.src([
     // Include files
     'public/**/*',
