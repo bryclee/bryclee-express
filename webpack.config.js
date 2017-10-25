@@ -12,7 +12,7 @@ module.exports = {
         filename: '[name].bundle.js'
     },
     entry: {
-        app: ['babel-polyfill', './sudoku'],
+        sudoku: ['babel-polyfill', './sudoku'],
         name: './name'
     },
 

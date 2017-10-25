@@ -2,7 +2,7 @@ var express = require('express');
 var ejs = require('ejs');
 var path = require('path');
 var common = require(path.resolve(process.cwd(), 'routes/common'));
-var renderMaster = require('../renderMaster');
+var { renderMaster, sendWhenRendered } = common;
 
 var indexApp = express();
 
@@ -23,18 +23,19 @@ var SAMPLE_MODEL = {
 }
 
 indexApp.get('/', (req, res) => {
-  common.sendWhenRendered(res, renderMaster({
+  sendWhenRendered(res, renderMaster({
     contentUri: path.resolve(__dirname, 'index.ejs'),
     contentData: SAMPLE_MODEL
   }));
 });
 
 indexApp.get('/sudoku', (req, res) => {
-  common.sendWhenRendered(res, renderMaster({
+  sendWhenRendered(res, renderMaster({
     title: 'Sudoku',
     style: 'static/css/sudoku/sudoku.css',
     contentUri: path.resolve(__dirname, 'sudoku.ejs'),
     contentData: {}
   }));
 });
+
 module.exports = indexApp;
