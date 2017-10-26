@@ -24,18 +24,13 @@ function respond404(res) {
     res.send(errorTemplate);
 }
 
+const masterTemplatePath = path.join(__dirname, 'master.ejs');
+
 function renderMaster(data, options) {
     return renderFilePromise(
-        path.join(__dirname, 'master.ejs'),
-        {
-            title: data.title || 'bryclee',
-            style: data.style || 'static/css/app.css',
-            contentUri: data.contentUri,
-            contentData: data.contentData
-        },
-        extend({
-
-        }, options)
+        masterTemplatePath,
+        data,
+        options
     );
 }
 

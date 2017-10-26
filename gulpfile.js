@@ -1,19 +1,14 @@
 var gulp = require('gulp');
 var path = require('path');
+var through = require('through2');
 
 var del = require('del');
 var webpack = require('webpack');
 var webpackConfig = require('./webpack.config');
 var less = require('gulp-less');
-var mocha = require('gulp-mocha');
 
-var through = require('through2');
 
 var BUILD_DIR = '.build';
-
-gulp.task('default', () => {
-  // Fill out default task later ʕ´•ᴥ•`ʔ
-});
 
 // Build task
 gulp.task('build', ['del', 'webpack', 'copy', 'less']);
@@ -54,14 +49,6 @@ gulp.task('copy', ['del'], () => {
     '!public/css/**/*',
     '!public/template/**/*'
   ]).pipe(gulp.dest(BUILD_DIR));
-});
-
-// Run the unit tests
-gulp.task('test', () => {
-  return gulp.src(['tests/**/*Spec.js'], { read: false })
-    .pipe(mocha({
-      reporter: 'spec'
-    }));
 });
 
 // An example of what the an html compile step might look like?

@@ -7,9 +7,9 @@ var app = express();
 app.get('/3d-animation', function(req, res) {
     sendWhenRendered(res, renderMaster({
         title: '3d-animation',
-        style: 'static/css/3d.css',
-        script: 'static/js/3d.js',
-        contentUri: path.resolve(__dirname, 'index.ejs')
+        styles: ['static/css/3d.css'],
+        scripts: ['static/js/3d.js'],
+        templatePath: path.resolve(__dirname, 'index.ejs')
     }));
 });
 

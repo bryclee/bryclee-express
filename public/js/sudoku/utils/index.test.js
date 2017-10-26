@@ -1,18 +1,18 @@
 'use strict';
 
-var expect = require('chai').expect;
-var utils = require('../../public/js/sudoku/utils/index');
+var utils = require('./index.js');
 
 // apply test case inputs to fn and expect the result
 function testFn(fn, testCases) {
   testCases.forEach(function(testCase) {
     var input = testCase.input;
     var expected = testCase.output;
+    var name = JSON.stringify(input);
 
-    it(JSON.stringify(input), function() {
+    it(`input: ${name}`, function() {
       var result = fn.apply(null, input);
 
-      expect(result).to.eql(expected);
+      expect(result).toEqual(expected);
     });
   });
 }

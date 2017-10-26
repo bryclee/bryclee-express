@@ -22,19 +22,21 @@ var SAMPLE_MODEL = {
   ]
 }
 
+const indexPath = path.resolve(__dirname, 'index.ejs');
+
 indexApp.get('/', (req, res) => {
   sendWhenRendered(res, renderMaster({
-    contentUri: path.resolve(__dirname, 'index.ejs'),
-    contentData: SAMPLE_MODEL
+    templatePath: indexPath,
+    templateData: SAMPLE_MODEL
   }));
 });
 
 indexApp.get('/sudoku', (req, res) => {
   sendWhenRendered(res, renderMaster({
     title: 'Sudoku',
-    style: 'static/css/sudoku/sudoku.css',
-    contentUri: path.resolve(__dirname, 'sudoku.ejs'),
-    contentData: {}
+    template: '<sudoku-main-box></sudoku-main-box>',
+    styles: ['static/css/sudoku/sudoku.css'],
+    scripts: ['/static/js/polyfill.bundle.js', '/static/js/sudoku.bundle.js']
   }));
 });
 

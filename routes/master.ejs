@@ -1,20 +1,16 @@
-<%# Props: title, style, content %>
 <!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <title><%= ['bryclee', title].join(' - '); %></title>
+    <title><%= `bryclee${ locals.title ? `- ${title}` : ''}` %></title>
 
     <link rel="stylesheet" href="/static/css/app.css">
     <link rel="shortcut icon" href="/static/favicon.ico">
 
-    <% if (style) { %>
-      <link rel="stylesheet" href="<%- style %>">
-    <% } %>
-
-    <script src="/static/js/name.bundle.js"></script>
-    <% if (script) { %>
-      <script src="<%- script %>">
+    <% if (locals.styles) { %>
+      <% locals.styles.forEach(style => { %>
+        <link rel="stylesheet" href="<%- style %>">
+      <% }) %>
     <% } %>
   </head>
   <body>
@@ -24,10 +20,21 @@
           <a href="/"><span class="fill-parent"></span></a>
         </div>
       </div>
+      <script src="/static/js/name.bundle.js"></script>
     </header>
 
     <main>
-      <%- include(contentPath, contentData) %>
+      <% if (locals.template) { %>
+        <%- template %>
+      <% } else if (locals.templatePath) { %>
+        <%- include(templatePath, templateData) %>
+      <% } %>
+
+      <% if (locals.scripts) { %>
+        <% locals.scripts.forEach(script => { %>
+          <script src="<%- script %>"></script>
+        <% }) %>
+      <% } %>
     </main>
   </body>
 </html>

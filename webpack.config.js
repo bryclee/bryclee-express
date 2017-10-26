@@ -1,7 +1,7 @@
 'use strict';
 
 var path = require('path');
-var baseDir = process.cwd();
+var baseDir = __dirname;
 
 module.exports = {
     devtool: '#inline-source-map',
@@ -12,7 +12,8 @@ module.exports = {
         filename: '[name].bundle.js'
     },
     entry: {
-        sudoku: ['babel-polyfill', './sudoku'],
+        polyfill: 'babel-polyfill',
+        sudoku: './sudoku',
         name: './name'
     },
 

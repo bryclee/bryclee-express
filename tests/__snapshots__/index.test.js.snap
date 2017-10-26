@@ -1,0 +1,79 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`routes should render the index route 1`] = `
+"<!DOCTYPE html>
+<html lang=\\"en\\">
+  <head>
+    <meta charset=\\"utf-8\\" />
+    <title>bryclee</title>
+
+    <link rel=\\"stylesheet\\" href=\\"/static/css/app.css\\">
+    <link rel=\\"shortcut icon\\" href=\\"/static/favicon.ico\\">
+
+    
+  </head>
+  <body>
+    <header class=\\"header-bar\\">
+      <div class=\\"header-bar-fill fixed\\">
+        <div class=\\"fixed\\" id=\\"header-banner\\">
+          <a href=\\"/\\"><span class=\\"fill-parent\\"></span></a>
+        </div>
+      </div>
+      <script src=\\"/static/js/name.bundle.js\\"></script>
+    </header>
+
+    <main>
+      
+        <div class=\\"main-content\\">
+
+  <div class=\\"left-col-wrapper\\">
+    <div class=\\"left-col fixed\\">
+      <div id=\\"subheader\\">Hi, I'm Bryan Lee.</div>
+      <div class=\\"sidebar-about\\">
+        <p>I'm a software engineer in the Bay Area. I work with JavaScript and the full-stack, but I love learning and working with new technologies.</p>
+        <p>I'm still working on my site, so come back soon and hopefully see it change!</p>
+        <p>In the meantime, please check out my <a href=\\"static/misc/resume.pdf\\">resume</a> or my <a href=\\"https://github.com/bryclee\\">github</a> to see some of my work!</p>
+      </div>
+    </div>
+  </div>
+
+  <div class=\\"center-col\\">
+    <div class=\\"blog-posts\\">
+      
+        <div class=\\"blog-post\\">
+          <h1 class=\\"post-title\\">Hello</h1>
+          <div class=\\"post-content\\">
+            <div class=\\"post-text\\">First post goes here</div>
+            <div class=\\"post-tags\\">
+              
+                <a class=\\"post-tag\\" href=\\"tags/Tags\\">Tags</a>
+              
+                <a class=\\"post-tag\\" href=\\"tags/Go here\\">Go here</a>
+              
+            </div>
+          </div>
+        </div>
+      
+        <div class=\\"blog-post\\">
+          <h1 class=\\"post-title\\">Hello again</h1>
+          <div class=\\"post-content\\">
+            <div class=\\"post-text\\">Second post goes here</div>
+            <div class=\\"post-tags\\">
+              
+            </div>
+          </div>
+        </div>
+      
+    </div>
+  </div>
+
+</div>
+
+      
+
+      
+    </main>
+  </body>
+</html>
+"
+`;
